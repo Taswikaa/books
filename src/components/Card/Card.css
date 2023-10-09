@@ -1,0 +1,37 @@
+.card {
+  box-sizing: border-box;
+  width: 282px;
+  background-color: #323232;
+  color: #DDD0C8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 15px;
+  min-height: 426px;
+} 
+
+.card__bg {
+  margin-bottom: 25px;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.card__title {
+  margin: 0;
+  font-weight: 500;
+  min-height: 56px;
+}
+
+.card__categhory {
+  margin: 0;
+  opacity: .7;
+}
+
+.card__authors {
+  margin: 0;
+  min-height: 56px;
+}

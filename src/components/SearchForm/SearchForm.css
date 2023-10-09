@@ -129,8 +129,7 @@
   }
   
   .search__title {
-    margin: 0 0 40px;
-    font-size: 42px;
+    font-size: 38px;
   }
   
   .search__form-input {
@@ -154,15 +153,15 @@
   }
   
   .search__form-filter {
-    font-size: 28px;
+    font-size: 24px;
   }
   
   .search__form-subtitle {
-    font-size: 28px;
+    font-size: 24px;
   }
   
   .select {
-    padding: 10px;
+    padding: 7px;
     text-transform: uppercase;
     cursor: pointer;
   }
