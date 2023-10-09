@@ -6,6 +6,7 @@
   align-items: center;
   row-gap: 20px;
   color: #323232;
+  position: relative;
 }
 
 .detail__info {
@@ -35,6 +36,15 @@
   opacity: .9;
 }
 
+.detail__link {
+  font-size: 18px;
+  color: #163d85;
+  text-decoration: none;
+  transition: opacity .3s;
+  position: absolute;
+  bottom: -45px;
+}
+
 @media screen and (min-width: 768px) {
   .detail {
     flex-direction: row;
@@ -43,7 +53,44 @@
     padding-top: 40px;
   }
 
+  .detail__bg {
+    height: 300px;
+    object-fit: cover;
+  }
+
   .detail__info {
     max-width: 650px;
+  }
+
+  .detail__link {
+    left: 50%;
+    bottom: -70px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .detail {
+    font-size: 24px;
+    padding: 50px 0 0;
+    margin: 0 auto;
+    column-gap: 50px;
+  }
+
+  .detail__title {
+    font-size: 28px;
+  }
+
+  .detail__bg {
+    height: 400px;
+  }
+
+  .detail__link {
+    font-size: 22px;
+    left: 50%;
+    bottom: -100px;
+  }
+
+  .detail__link:hover {
+    opacity: .7;
   }
 }
