@@ -1,0 +1,49 @@
+.detail {
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  color: #323232;
+}
+
+.detail__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.detail__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
+.detail__about {
+  margin: 0;
+}
+
+.detail__categhories {
+  margin: 0;
+  opacity: .7;
+}
+
+.detail__authors {
+  margin: 0;
+  opacity: .9;
+}
+
+@media screen and (min-width: 768px) {
+  .detail {
+    flex-direction: row;
+    column-gap: 30px;
+    margin: 0 auto;
+    padding-top: 40px;
+  }
+
+  .detail__info {
+    max-width: 650px;
+  }
+}
