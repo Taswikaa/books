@@ -38,8 +38,9 @@
 
 .detail__link {
   font-size: 18px;
-  color: #163d85;
-  text-decoration: none;
+  background-color: transparent;
+  color: #141d65;
+  border: none;
   transition: opacity .3s;
   position: absolute;
   bottom: -45px;
@@ -92,5 +93,6 @@
 
   .detail__link:hover {
     opacity: .7;
+    cursor: pointer;
   }
 }
