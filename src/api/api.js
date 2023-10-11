@@ -15,7 +15,7 @@ class Api {
   }
 
   getBooksByQuery(query) {
-    const finalQueryUrl = `${this._url}${query}+intitle:${query}&maxResults=30&key=${key}`;
+    const finalQueryUrl = `${this._url}${query}+intitle:${query}&maxResults=30&startIndex=0&key=${key}`;
 
     return fetch(finalQueryUrl, {
       method: 'GET'
@@ -23,6 +23,17 @@ class Api {
     .then(res => {
       return this._checkStatus(res);
     }) 
+  }
+
+  getMoreBooks(query, page) {
+    const finalQueryUrl = `${this._url}${query}+intitle:${query}&maxResults=30&startIndex=${page}&key=${key}`;
+
+    return fetch(finalQueryUrl, {
+      method: 'GET'
+    })
+    .then(res => {
+      return this._checkStatus(res);
+    })
   }
 }
 

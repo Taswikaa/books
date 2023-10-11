@@ -22,6 +22,10 @@
   box-shadow: 0 0 1px 1px #323232;
 }
 
+.load_more_status_hide {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .card-list {
     display: grid;
