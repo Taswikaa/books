@@ -17,6 +17,7 @@ const CardList = () => {
     dispatch({type: 'CLEAR'}); 
   }
 
+  const [messageForUser, setMessageForUser] = useState('Здесь будет результат поиска');
   const [toLoad, setToLoad] = useState(30);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
@@ -40,6 +41,13 @@ const CardList = () => {
         loadBooks(data.items);
         setTotalItems(data.totalItems);
         setToLoad(30);
+      })
+      .catch(err => {
+        if (err.name === 'TypeError') {
+          setMessageForUser('По вашему запросу ничего не найдено');
+        } else {
+          setMessageForUser('Произошла ошибка на сервере'); 
+        }
       })
     }
   }, [searchData])
@@ -73,7 +81,7 @@ const CardList = () => {
             })
           ) :
           (
-          <p className='not-found'>Ничего не найдено</p>
+          <p className='not-found'>{messageForUser}</p>
           )
         }
       </ul>

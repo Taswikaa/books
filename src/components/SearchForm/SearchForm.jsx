@@ -1,19 +1,30 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import './SearchForm.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchForm = () => {
   const dispatch = useDispatch();
 
-  const seacrhData = (data) => {
+  const setSeacrhData = (data) => {
     dispatch({type: 'ENTER', payload: data}); 
   }
+  const searchData = useSelector(state => state.search);
 
   const [query, setQuery] = useState({
     title: '',
     categories: 'all',
     sorting: 'relevance'
   });
+
+  useEffect(() => {
+    if (searchData.query) {
+      setQuery({...query, 
+        title: searchData.query,
+        categories: searchData.categories,
+        sorting: searchData.sorting
+      })
+    }
+  }, [])
 
   const changeInput = (e, type) => {
     setQuery({...query, [type]: e.target.value})
@@ -22,7 +33,7 @@ const SearchForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    seacrhData(query);
+    setSeacrhData(query);
   }
 
   return (
