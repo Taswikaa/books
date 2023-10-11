@@ -6,10 +6,15 @@ import api from '../../api/api';
 
 const CardList = () => {
   const dispatch = useDispatch();
-  const books = useSelector(state => state.search);
+  const books = useSelector(state => state.books);
+  const searchData = useSelector(state => state.search);
 
   const loadBooks = (data) => {
     dispatch({type: 'LOAD', payload: data}); 
+  }
+
+  const clearBooks = (data) => {
+    dispatch({type: 'CLEAR'}); 
   }
 
   const [toLoad, setToLoad] = useState(30);
@@ -18,8 +23,7 @@ const CardList = () => {
 
   const loadMore = () => {
     if (books.books.length) {
-      console.log(toLoad);
-      api.getMoreBooks('Цвет и дизайн', toLoad)
+      api.getMoreBooks(searchData, toLoad)
       .then(data => {
         loadBooks(data.items);
         setToLoad(prev => prev + 30)
@@ -28,13 +32,17 @@ const CardList = () => {
   }
 
   useEffect(() => {
-    api.getBooksByQuery('Цвет и дизайн')
-    .then(data => {
-      console.log(data);
-      loadBooks(data.items);
-      setTotalItems(data.totalItems);
-    })
-  }, [])
+    if (searchData.query) {
+      api.getBooksByQuery(searchData)
+      .then(data => {
+        console.log(data);
+        clearBooks();
+        loadBooks(data.items);
+        setTotalItems(data.totalItems);
+        setToLoad(30);
+      })
+    }
+  }, [searchData])
 
   useEffect(() => {
     if (toLoad >= totalItems) {
@@ -64,7 +72,9 @@ const CardList = () => {
               )
             })
           ) :
-          (<p>Ничего не найдено</p>)
+          (
+          <p className='not-found'>Ничего не найдено</p>
+          )
         }
       </ul>
       <button className={`load-more ${isAllLoaded || !books.books.length ? 'load_more_status_hide' : ''}`} onClick={loadMore}>Load more</button>

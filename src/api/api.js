@@ -14,8 +14,12 @@ class Api {
     return Promise.reject(res.status);
   }
 
-  getBooksByQuery(query) {
-    const finalQueryUrl = `${this._url}${query}+intitle:${query}&maxResults=30&startIndex=0&key=${key}`;
+  getBooksByQuery(seacrhData) {
+    const { query, sorting, categories } = seacrhData;
+
+    let category = categories === 'all' ? '' : `+subject:${categories}`;
+
+    const finalQueryUrl = `${this._url}${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=0&key=${key}`;
 
     return fetch(finalQueryUrl, {
       method: 'GET'
@@ -25,8 +29,12 @@ class Api {
     }) 
   }
 
-  getMoreBooks(query, page) {
-    const finalQueryUrl = `${this._url}${query}+intitle:${query}&maxResults=30&startIndex=${page}&key=${key}`;
+  getMoreBooks(seacrhData, page) {
+    const { query, sorting, categories } = seacrhData;
+
+    let category = categories === 'all' ? '' : `+subject:${categories}`;
+
+    const finalQueryUrl = `${this._url}${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=${page}&key=${key}`;
 
     return fetch(finalQueryUrl, {
       method: 'GET'
