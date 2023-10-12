@@ -61,6 +61,7 @@ const CardList = () => {
 
   return (
     <>
+      <p className='all-found'>Всего найдено: {totalItems}</p>
       <ul className='card-list'>
         {
           books.books.length > 0 ? (
