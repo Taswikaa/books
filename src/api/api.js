@@ -19,7 +19,7 @@ class Api {
 
     let category = categories === 'all' ? '' : `+subject:${categories}`;
 
-    const finalQueryUrl = `${this._url}${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=0&key=${key}`;
+    const finalQueryUrl = `${this._url}?q=${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=0&key=${key}`;
 
     return fetch(finalQueryUrl, {
       method: 'GET'
@@ -34,9 +34,18 @@ class Api {
 
     let category = categories === 'all' ? '' : `+subject:${categories}`;
 
-    const finalQueryUrl = `${this._url}${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=${page}&key=${key}`;
+    const finalQueryUrl = `${this._url}?q=${query}+intitle:${query}${category}&maxResults=30&orderBy=${sorting}&startIndex=${page}&key=${key}`;
 
     return fetch(finalQueryUrl, {
+      method: 'GET'
+    })
+    .then(res => {
+      return this._checkStatus(res);
+    })
+  }
+
+  getDetailBookInfo(id) {
+    return fetch(`${this._url}/${id}`, {
       method: 'GET'
     })
     .then(res => {
@@ -48,6 +57,6 @@ class Api {
 
 
 
-const api = new Api('https://www.googleapis.com/books/v1/volumes?q=', key);
+const api = new Api('https://www.googleapis.com/books/v1/volumes', key);
 
 export default api;

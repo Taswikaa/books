@@ -1,18 +1,65 @@
-import React from 'react';
+import { React, useState } from 'react';
 import './DetailCard.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const DetailCard = () => {
   const navigate = useNavigate();
+  
+  const [data, setData] = useState({
+    src: '',
+    title: '',
+    categories: [],
+    authors: [],
+    description: ''
+  });
+
+  const extendedData = useSelector(state => state.extendedData);
+
+  useEffect(() => {
+    const { src, title, categories, authors, description } = extendedData;
+
+    console.log(extendedData);
+
+    setData({...data, 
+      title,
+      src,
+      categories,
+      authors,
+      description
+    })
+  }, [extendedData]);
 
   return (
     <div className='detail'>
-      <img className='detail__bg' src='http://books.google.com/books/content?id=s1gVAAAAYAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70vPq4lsKXM3UVHnuNLU0MoOyOYZeOrsAtcuT_fU-Ih9bjMkj-0zB0xjhm8-m69g-tDHqAUwL_foXVOHBFJLXJk3nMzTKleEAq6mMtiZGYTxXDG7Vz0it7mJj60QlkLtIMulJxu&source=gbs_api' alt='' />
+      <img className='detail__bg' src={data.src} alt='' />
       <div className='detail__info'>
-        <p className='detail__title'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet, sunt!</p>
-        <p className='detail__about'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque soluta commodi ullam consequuntur quo natus minus rerum explicabo rem dolorum! Nesciunt deserunt neque odit quod quo dignissimos explicabo, quis eaque eveniet iure minima sit assumenda excepturi nobis rem eligendi quam molestiae earum illo asperiores. Qui?</p>
-        <p className='detail__categhories'>Computers</p>
-        <p className='detail__authors'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, cum!</p>
+        <p className='detail__title'>{data.title}</p>
+        <p className='detail__about'>{data.description}</p>
+        <p className='detail__categhories'>
+          {
+            data.categories && data.categories.length > 0 ? (
+              data.categories.map(el => {
+                return el;
+              })
+            ) : (
+              <span>Нет категорий</span>
+            )
+          }
+        </p>
+        <p className='detail__authors'>
+          {
+            data.authors && data.authors.length > 0 ? (
+              data.authors.map(el => {
+                return el;
+              })
+            ) :
+            (
+              <span>Авторы не указаны</span>
+            )
+          }
+        </p>
       </div>
       <button
         className='detail__link'

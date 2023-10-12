@@ -36,7 +36,6 @@ const CardList = () => {
     if (searchData.query) {
       api.getBooksByQuery(searchData)
       .then(data => {
-        console.log(data);
         clearBooks();
         loadBooks(data.items);
         setTotalItems(data.totalItems);
@@ -76,12 +75,13 @@ const CardList = () => {
                   cathegory={categories ? categories : ['Нет категорий']}
                   src={src}
                   key={key}
+                  id={el.id}
                 />
               )
             })
           ) :
           (
-          <p className='not-found'>{messageForUser}</p>
+            <li key={2} className='not-found'>{messageForUser}</li>
           )
         }
       </ul>

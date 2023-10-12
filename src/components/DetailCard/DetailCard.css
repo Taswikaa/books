@@ -36,6 +36,11 @@
   opacity: .9;
 }
 
+.detail__bg {
+  height: 300px;
+  object-fit: cover;
+}
+
 .detail__link {
   font-size: 18px;
   background-color: transparent;
@@ -52,11 +57,6 @@
     column-gap: 30px;
     margin: 0 auto;
     padding-top: 40px;
-  }
-
-  .detail__bg {
-    height: 300px;
-    object-fit: cover;
   }
 
   .detail__info {
