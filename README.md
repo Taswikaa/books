@@ -1,3 +1,9 @@
+Стек:
+   - JavaScript
+   - React
+   - Redux
+   - create-react-app
+
 ## npm i && npm start для запуска
 
 ## Возможности:
